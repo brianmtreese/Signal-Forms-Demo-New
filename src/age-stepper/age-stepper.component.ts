@@ -3,26 +3,8 @@ import { FormValueControl, ValidationError, WithOptionalField } from '@angular/f
 
 @Component({
   selector: 'age-stepper',
-  template: `
-    @let isDisabled = disabled() || readonly();
-    <div class="age-stepper">
-      <button type="button" (click)="decrement()" [disabled]="isDisabled">−</button>
-
-      <span class="value" [attr.aria-disabled]="isDisabled">
-        {{ value() }}
-      </span>
-
-      <button type="button" (click)="increment()" [disabled]="isDisabled">+</button>
-    </div>
-
-    @if (touched() && invalid()) {
-      <ul class="errors">
-        @for (e of errors(); track e.kind) {
-          <li>{{ e.message }}</li>
-        }
-      </ul>
-    }
-  `,
+  templateUrl: './age-stepper.component.html',
+  styleUrls: ['./age-stepper.component.scss'],
 })
 export class AgeStepperComponent implements FormValueControl<number> {
   // REQUIRED for FormValueControl: value model signal
