@@ -29,7 +29,7 @@
       <input
         id="username"
         type="text"
-        [field]="form.username"
+        [formField]="form.username"
         [class.error]="showUsernameError"
         autocomplete="none"
         autofill="none"
@@ -74,7 +74,7 @@
       <input
         id="email"
         type="email"
-        [field]="form.email"
+        [formField]="form.email"
         [class.error]="showEmailError"
         autocomplete="none"
         autofill="none"
@@ -109,11 +109,12 @@
       <input
         id="age"
         type="number"
-        [field]="form.age"
+        [formField]="form.age"
       />
     </div>
 
-    <age-stepper [field]="form.age"></age-stepper>
+  <!-- TODO: Verify that we still need to pass value when we complete this section. Should just be teporary and shouldn't be needed -->
+    <age-stepper [formField]="form.age" [value]="form.age().value()"></age-stepper>
 
     <!-- @if (!form.guardianName().hidden()) { -->
     @if (form.age().value() < 18) {
@@ -122,7 +123,7 @@
         <input
           id="guardianName"
           type="text"
-          [field]="form.guardianName"
+          [formField]="form.guardianName"
         />
       </div>
     }
@@ -139,7 +140,7 @@
             <div>
               <input 
                 type="email" 
-                [field]="emailField"
+                [formField]="emailField"
                 [placeholder]="'Alternate email ' + ($index + 1)"
               />
               

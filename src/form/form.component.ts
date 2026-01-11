@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
 // import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { form, Field, required, email, validateAsync, debounce, hidden, validate, applyEach, submit, min, disabled } from '@angular/forms/signals';
+import { form, FormField, required, email, validateAsync, debounce, hidden, validate, applyEach, submit, min, disabled } from '@angular/forms/signals';
 import { JsonPipe } from '@angular/common';
 import { resource } from '@angular/core';
 import { AuthApiMockService, SignUpForm } from './auth-api.service';
@@ -78,7 +78,7 @@ interface Address {
   styleUrl: './form.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 	// imports: [ReactiveFormsModule],
-  imports: [Field, JsonPipe, AgeStepperComponent],
+  imports: [FormField, JsonPipe, AgeStepperComponent],
 })
 export class FormComponent {
 	// protected form = new FormGroup<SignUpForm>({
