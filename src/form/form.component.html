@@ -1,0 +1,172 @@
+<div class="form-container">
+  <h2>Create Account</h2>
+  <!-- <form [formGroup]="form"> -->
+  <form (submit)="onSubmit($event)" novalidate>
+
+    @if (form().errors().length) {
+      <div class="form-error" role="alert">
+        @for (error of form().errors(); track error.kind) {
+          <p>{{ error.message }}</p>
+        }
+      </div>
+    }
+
+    <div class="field">
+      <!-- @let username = form.get('username'); -->
+      <!-- @let showUsernameError = username?.invalid && username?.touched; -->
+      @let username = form.username();
+      @let showUsernameError = username.invalid() && username.touched();
+      <label for="username">Username</label>
+      <!-- <input
+        id="username"
+        type="text"
+        formControlName="username"
+        [class.error]="showUsernameError"
+        name="no-autocomplete"
+        autocomplete="none"
+        autofill="none"
+      /> -->
+      <input
+        id="username"
+        type="text"
+        [field]="form.username"
+        [class.error]="showUsernameError"
+        autocomplete="none"
+        autofill="none"
+      />
+      <!-- @if (showUsernameError) {
+        <div class="error-message">
+          {{ getUsernameError() }}
+        </div>
+      } -->
+      @if (username.pending()) {
+        <p class="info">Checking availability...</p>
+      }
+      @if (username.dirty()) {
+        @for (error of username.errors(); track error.kind) {
+          @if (error.kind === 'username_taken') {
+            <p class="error">{{ error.message }}</p>
+          }
+        }
+      } @else if (username.touched() && username.invalid()) {
+        <ul class="error-list">
+          @for (error of username.errors(); track error.kind) {
+            <li>{{ error.message }}</li>
+          }
+        </ul>
+      }
+    </div>
+    <div class="field">
+      <!-- @let email = form.get('email'); -->
+      <!-- @let showEmailError = email?.invalid && email?.touched; -->
+      @let email = form.email();
+      @let showEmailError = email.invalid() && email.touched();
+      <label for="email">Email</label>
+      <!-- <input
+        id="email"
+        type="email"
+        formControlName="email"
+        [class.error]="showEmailError"
+        name="no-autocomplete"
+        autocomplete="none"
+        autofill="none"
+      /> -->
+      <input
+        id="email"
+        type="email"
+        [field]="form.email"
+        [class.error]="showEmailError"
+        autocomplete="none"
+        autofill="none"
+      />
+      <!-- @if (showEmailError) {
+        <div class="error-message">
+          @if (email?.hasError('required')) { 
+            Email is required 
+          }
+          @else if (email?.hasError('email')) { 
+            Please enter a valid email address
+          }
+        </div>
+      } -->
+
+      <!-- @if (showEmailError) {
+        <div class="error-message">
+          {{ getEmailError() }}
+        </div>
+      } -->
+
+      <ul class="error-list">
+        @for (err of email.errors(); track err.kind) {
+          <li>{{ err.message }}</li>
+        }
+      </ul>
+    </div>
+
+
+    <div class="field">
+      <label for="age">Age</label>
+      <input
+        id="age"
+        type="number"
+        [field]="form.age"
+      />
+    </div>
+
+    <age-stepper [field]="form.age"></age-stepper>
+
+    <!-- @if (!form.guardianName().hidden()) { -->
+    @if (form.age().value() < 18) {
+      <div class="field">
+        <label for="guardianName">Guardian Name</label>
+        <input
+          id="guardianName"
+          type="text"
+          [field]="form.guardianName"
+        />
+      </div>
+    }
+
+
+    <fieldset>
+      <legend>
+        Alternate email addresses
+        <button type="button" (click)="addAlternateEmail()">
+          Add email
+        </button>
+      </legend>
+    
+      @for (emailField of form.alternateEmails; track $index) {
+        <div class="alt-email-row">
+          <input type="email" [field]="emailField" />
+    
+          <button type="button" (click)="removeAlternateEmail($index)">
+            Remove
+          </button>
+    
+          @let fieldState = emailField();
+    
+          @if (fieldState.touched() && fieldState.invalid()) {
+            <ul class="error-list">
+              @for (error of fieldState.errors(); track error.kind) {
+                <li>{{ error.message }}</li>
+              }
+            </ul>
+          }
+        </div>
+      }
+    </fieldset>
+
+    <!-- <button type="submit" [disabled]="form.invalid"> -->
+    <button type="submit" [disabled]="form().invalid() || form().submitting()">
+      @if (form().submitting()) {
+        Submitting…
+      } @else {
+        Create account
+      }
+    </button>
+  </form>
+
+  <pre>{{ form.username().invalid() | json }}</pre>
+
+</div>
