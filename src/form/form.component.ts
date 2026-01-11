@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
 // import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { form, Field, required, email, customError, validateAsync, debounce, hidden, validate, applyEach, submit, min, disabled } from '@angular/forms/signals';
+import { form, Field, required, email, validateAsync, debounce, hidden, validate, applyEach, submit, min, disabled } from '@angular/forms/signals';
 import { JsonPipe } from '@angular/common';
 import { resource } from '@angular/core';
 import { AuthApiMockService, SignUpForm } from './auth-api.service';
@@ -169,10 +169,10 @@ export class FormComponent {
 			onSuccess: (result: boolean) => {
 				// result is the return value from the loader (the boolean)
 				if (result === false) {
-						return customError({
-								kind: 'username_taken',
-								message: 'This username is already taken',
-						});
+						return {
+							kind: 'username_taken',
+							message: 'This username is already taken',
+						};
 				}
 				return null;
 			},
