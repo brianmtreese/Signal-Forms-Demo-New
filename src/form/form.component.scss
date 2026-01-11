@@ -4,77 +4,17 @@
   padding: 2rem;
   border: 1px solid #ddd;
   border-radius: 8px;
-}
 
-h2 {
-  margin-top: 0;
-}
+  h2 {
+    margin-top: 0;
+  }
 
-.field {
-  margin-bottom: 1.5rem;
-}
-
-label {
-  display: block;
-  margin-bottom: 0.5rem;
-  font-weight: 500;
-}
-
-input {
-  background-color: #1e293b;
-  color: inherit;
-  width: 100%;
-  padding: 0.75rem;
-  border: 1px solid #475569;
-  border-radius: 4px;
-  font-size: 1rem;
-}
-
-input.error {
-  border-color: #e74c3c;
-}
-
-.error-message {
-  color: #e74c3c;
-  font-size: 0.875rem;
-  margin-top: 0.5rem;
-}
-
-.error-list {
-  margin-top: 0.5rem;
-  padding-left: 0;
-  list-style: none;
-}
-
-.error-list li {
-  color: #e74c3c;
-  font-size: 0.875rem;
-  margin-top: 0.25rem;
-  padding-left: 1rem;
-  position: relative;
-}
-
-.error-list li::before {
-  content: "•";
-  position: absolute;
-  left: 0;
-  color: #e74c3c;
-}
-
-button {
-  width: 100%;
-  padding: 0.75rem;
-  background: #007bff;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  font-size: 1rem;
-  cursor: pointer;
-}
-
-button:disabled {
-  cursor: not-allowed;
-  opacity: 0.5;
+  button[type="submit"] {
+    width: 100%;
+    padding: 0.75rem;
+    background: #007bff;
+    color: white;
+  }
 }
 
 .alternate-emails {
@@ -96,6 +36,65 @@ button:disabled {
     justify-self: flex-start;
   }
 
+  > div {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    > div {
+      display: flex;
+      gap: 0.75rem;
+
+      > div:first-child {
+        flex: 1;
+        min-width: 0;
+
+        input {
+          border-radius: 6px;
+        }
+
+        .error-list {
+          li {
+            padding-left: 0.5rem;
+          }
+        }
+      }
+
+      button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.75rem;
+        background-color: #475569;
+        color: white;
+        border-radius: 6px;
+        flex-shrink: 0;
+        width: 2.5rem;
+        min-width: 2.5rem;
+
+        &:hover:not(:disabled) {
+          background-color: #ef4444;
+          transform: translateY(-1px);
+          box-shadow: 0 2px 4px rgba(239, 68, 68, 0.3);
+        }
+
+        &:active:not(:disabled) {
+          transform: translateY(0);
+        }
+
+        &:disabled {
+          opacity: 0.4;
+        }
+
+        svg {
+          width: 16px;
+          height: 16px;
+          display: block;
+        }
+      }
+    }
+  }
+
   button.add-email-btn {
     display: flex;
     align-items: center;
@@ -104,11 +103,8 @@ button:disabled {
     margin: 1rem auto 0;
     background-color: transparent;
     color: #007bff;
-    border: none;
     font-size: 0.875rem;
     font-weight: 500;
-    cursor: pointer;
-    transition: all 0.2s ease;
 
     svg {
       width: 16px;
@@ -129,117 +125,9 @@ button:disabled {
     &:active:not(:disabled) {
       color: #004085;
     }
-
-    &:focus-visible {
-      outline: 2px solid #007bff;
-      outline-offset: 2px;
-      border-radius: 4px;
-    }
   }
 
-  > div {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-
-    > div {
-      display: flex;
-      gap: 0.75rem;
-
-      > div:first-child {
-        flex: 1;
-        min-width: 0;
-
-        input {
-          width: 100%;
-          background-color: #1e293b;
-          color: inherit;
-          padding: 0.75rem;
-          border: 1px solid #475569;
-          border-radius: 6px;
-          font-size: 1rem;
-          transition: border-color 0.2s ease, box-shadow 0.2s ease;
-
-          &:focus {
-            outline: none;
-            border-color: #007bff;
-            box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
-          }
-
-          &.error {
-            border-color: #e74c3c;
-
-            &:focus {
-              border-color: #e74c3c;
-              box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.1);
-            }
-          }
-        }
-
-        .error-list {
-          margin-top: 0.5rem;
-          padding-left: 0;
-          list-style: none;
-
-          li {
-            color: #e74c3c;
-            font-size: 0.875rem;
-            margin-top: 0.25rem;
-            padding-left: 0.5rem;
-            position: relative;
-
-            &::before {
-              content: "•";
-              position: absolute;
-              left: 0;
-              color: #e74c3c;
-            }
-          }
-        }
-      }
-
-      button {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 0.75rem;
-        background-color: #475569;
-        color: white;
-        border: none;
-        border-radius: 6px;
-        cursor: pointer;
-        transition: all 0.2s ease;
-        flex-shrink: 0;
-        width: 2.5rem;
-        min-width: 2.5rem;
-
-        &:hover:not(:disabled) {
-          background-color: #ef4444;
-          transform: translateY(-1px);
-          box-shadow: 0 2px 4px rgba(239, 68, 68, 0.3);
-        }
-
-        &:active:not(:disabled) {
-          transform: translateY(0);
-        }
-
-        &:disabled {
-          opacity: 0.4;
-          cursor: not-allowed;
-        }
-
-        svg {
-          width: 16px;
-          height: 16px;
-          display: block;
-        }
-      }
-    }
-  }
-
-  // Responsive adjustments
   @media (max-width: 480px) {
-
     > div > div {
       flex-direction: column;
 

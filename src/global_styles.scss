@@ -1,0 +1,101 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background-color: hsl(220 18% 10%);
+  color: white;
+  height: 100%;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  overflow: hidden;
+  height: 100%;
+}
+
+// Common form styles
+.field {
+  margin-bottom: 1.5rem;
+}
+
+label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+input {
+  background-color: #1e293b;
+  color: inherit;
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #475569;
+  border-radius: 4px;
+  font-size: 1rem;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+
+  &:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+  }
+
+  &.error {
+    border-color: #e74c3c;
+
+    &:focus {
+      border-color: #e74c3c;
+      box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.1);
+    }
+  }
+}
+
+// Common error styles
+.error-list,
+.errors {
+  margin-top: 0.5rem;
+  padding-left: 0;
+  list-style: none;
+
+  li {
+    color: #e74c3c;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+    padding-left: 1rem;
+    position: relative;
+
+    &::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      color: #e74c3c;
+    }
+  }
+}
+
+.error-message {
+  color: #e74c3c;
+  font-size: 0.875rem;
+  margin-top: 0.5rem;
+}
+
+// Common button styles
+button {
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  &:focus-visible {
+    outline: 2px solid #007bff;
+    outline-offset: 2px;
+  }
+}

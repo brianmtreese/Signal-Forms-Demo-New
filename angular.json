@@ -34,7 +34,7 @@
             "outputPath": "dist/demo",
             "polyfills": [],
             "scripts": [],
-            "styles": ["src/global_styles.css"],
+            "styles": ["src/global_styles.scss"],
             "tsConfig": "tsconfig.app.json"
           }
         },
