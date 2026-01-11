@@ -128,33 +128,54 @@
     }
 
 
-    <fieldset>
+    <fieldset class="alternate-emails">
       <legend>
-        Alternate email addresses
-        <button type="button" (click)="addAlternateEmail()">
-          Add email
-        </button>
+        <span>Alternate email addresses</span>
       </legend>
     
-      @for (emailField of form.alternateEmails; track $index) {
-        <div class="alt-email-row">
-          <input type="email" [field]="emailField" />
-    
-          <button type="button" (click)="removeAlternateEmail($index)">
-            Remove
-          </button>
-    
-          @let fieldState = emailField();
-    
-          @if (fieldState.touched() && fieldState.invalid()) {
-            <ul class="error-list">
-              @for (error of fieldState.errors(); track error.kind) {
-                <li>{{ error.message }}</li>
+      <div>
+        @for (emailField of form.alternateEmails; track $index) {
+          <div>
+            <div>
+              <input 
+                type="email" 
+                [field]="emailField"
+                [placeholder]="'Alternate email ' + ($index + 1)"
+              />
+              
+              @let fieldState = emailField();
+              
+              @if (fieldState.touched() && fieldState.invalid()) {
+                <ul class="error-list">
+                  @for (error of fieldState.errors(); track error.kind) {
+                    <li>{{ error.message }}</li>
+                  }
+                </ul>
               }
-            </ul>
-          }
-        </div>
-      }
+            </div>
+    
+            <button 
+              type="button" 
+              (click)="removeAlternateEmail($index)"
+              [attr.aria-label]="'Remove alternate email ' + ($index + 1)"
+              [disabled]="form.alternateEmails.length === 1"
+            >
+              <svg width="16" height="16">
+                <use href="assets/icons.svg#icon-trash"></use>
+              </svg>
+            </button>
+          </div>
+        }
+      </div>
+
+      <footer>
+        <button type="button" (click)="addAlternateEmail()" class="add-email-btn">
+          <svg width="16" height="16" aria-hidden="true">
+            <use href="assets/icons.svg#icon-plus"></use>
+          </svg>
+          <span>Add email</span>
+        </button>
+      </footer>
     </fieldset>
 
     <!-- <button type="submit" [disabled]="form.invalid"> -->
